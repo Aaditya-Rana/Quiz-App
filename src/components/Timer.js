@@ -34,8 +34,13 @@ const Timer = ({ timeLeft, onTimeUp }) => {
   }, [onTimeUp]);
 
   useEffect(()=>{
-    const timeLeft=localStorage.getItem('timeLeft');
-    setTime(timeLeft);
+    const timeRemain=localStorage.getItem('timeLeft');
+    if(timeLeft!==null){
+      setTime(timeRemain);
+    }
+    else{
+      setTime(timeLeft);
+    }
   }, []);
 
   const minutes = Math.floor(time / 60);
