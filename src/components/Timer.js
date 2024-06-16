@@ -18,6 +18,15 @@ const Timer = ({ timeLeft, onTimeUp }) => {
   const [time, setTime] = useState(timeLeft);
 
   useEffect(() => {
+    // Initialize timer based on localStorage or prop value
+    const initialTimeLeft = localStorage.getItem('timeLeft');
+    if (initialTimeLeft !== null) {
+      setTime(Number(initialTimeLeft));
+    } else {
+      setTime(timeLeft);
+    }
+
+    // Timer logic
     const timer = setInterval(() => {
       setTime(prevTime => {
         if (prevTime <= 1) {
@@ -30,18 +39,8 @@ const Timer = ({ timeLeft, onTimeUp }) => {
       });
     }, 1000);
 
-    return () => clearInterval(timer);
-  }, [onTimeUp]);
-
-  useEffect(()=>{
-    const timeRemain=localStorage.getItem('timeLeft');
-    if(timeLeft!==null){
-      setTime(timeRemain);
-    }
-    else{
-      setTime(timeLeft);
-    }
-  }, []);
+    return () => clearInterval(timer); // Cleanup timer on unmount
+  }, [timeLeft, onTimeUp]);
 
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
