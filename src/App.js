@@ -152,7 +152,7 @@ const App = () => {
           <FancyText>
             Welcome to the Quiz App
           </FancyText>
-          <GradientButton onClick={requestFullscreen}>Enable Fullscreen to Start Quiz</GradientButton>
+          <GradientButton onClick={requestFullscreen}>Click here to Start Quiz</GradientButton>
         </InnerDiv>
       </CenterDiv>
     );
